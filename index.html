@@ -2,11 +2,18 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Tommy e la Villa Scura</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta name="description" content="Platform 2D: aiuta Tommy a salvare Villa Scura e il castello!">
+  <meta name="theme-color" content="#0f0c22">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Tommy">
+  <link rel="preload" href="PressStart2P.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,6 +21,8 @@
     <header>
       <h1>Tommy e la Villa Scura</h1>
       <div class="comandi-rapidi">
+        <button id="btn-installa" type="button" hidden>⬇ Installa</button>
+        <button id="btn-schermo" type="button" hidden aria-label="Schermo intero">⛶</button>
         <button id="btn-pausa" type="button" aria-label="Pausa">⏸</button>
         <button id="btn-suono" type="button" aria-label="Suono">🔊</button>
       </div>
@@ -24,11 +33,12 @@
     </div>
 
     <div id="controlli">
-      <div class="gruppo">
+      <div class="gruppo sx">
+        <button class="tasto piccolo" type="button" data-azione="giu" aria-label="Scendi">▼</button>
         <button class="tasto" type="button" data-azione="sinistra" aria-label="Sinistra">◀</button>
         <button class="tasto" type="button" data-azione="destra" aria-label="Destra">▶</button>
       </div>
-      <div class="gruppo">
+      <div class="gruppo dx">
         <button class="tasto tondo" type="button" data-azione="fuoco">SPARA</button>
         <button class="tasto tondo grande" type="button" data-azione="salto">SALTA</button>
       </div>
@@ -43,6 +53,22 @@
       <li>M: suono</li>
     </ul>
   </main>
+
+  <!-- su telefono in verticale: invito a girare lo schermo -->
+  <div id="ruota" role="alert">
+    <div class="telefono" aria-hidden="true"></div>
+    <p>Ruota il telefono<br>in orizzontale</p>
+  </div>
+
+  <!-- istruzioni per installare su iPhone / iPad (Safari non ha il pulsante automatico) -->
+  <div id="guida-ios" hidden>
+    <div class="scheda">
+      <p><strong>Installa il gioco</strong></p>
+      <p>1. Tocca il pulsante <b>Condividi</b> <span aria-hidden="true">⬆️</span> di Safari</p>
+      <p>2. Scegli <b>Aggiungi alla schermata Home</b></p>
+      <button id="chiudi-guida" type="button">Ho capito</button>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
