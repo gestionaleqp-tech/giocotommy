@@ -1,15 +1,49 @@
-<div class="game-container">
-  <header>
-    <h1>MISTERO A VILLA SCURA</h1>
-    <div id="inventory">Inventario: <span id="items">Nessun oggetto</span></div>
-  </header>
-  
-  <div id="story-box">
-    <p id="story-text">Caricamento del mistero...</p>
-  </div>
-  
-  <div id="choices-box">
-    <button id="btn-a" class="choice-btn" onclick="scelta('A')">Scelta A</button>
-    <button id="btn-b" class="choice-btn" onclick="scelta('B')">Scelta B</button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tommy e la Villa Scura</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="gioco">
+    <header>
+      <h1>Tommy e la Villa Scura</h1>
+      <div class="comandi-rapidi">
+        <button id="btn-pausa" type="button" aria-label="Pausa">⏸</button>
+        <button id="btn-suono" type="button" aria-label="Suono">🔊</button>
+      </div>
+    </header>
+
+    <div class="schermo">
+      <canvas id="game"></canvas>
+    </div>
+
+    <div id="controlli">
+      <div class="gruppo">
+        <button class="tasto" type="button" data-azione="sinistra" aria-label="Sinistra">◀</button>
+        <button class="tasto" type="button" data-azione="destra" aria-label="Destra">▶</button>
+      </div>
+      <div class="gruppo">
+        <button class="tasto tondo" type="button" data-azione="fuoco">SPARA</button>
+        <button class="tasto tondo grande" type="button" data-azione="salto">SALTA</button>
+      </div>
+    </div>
+
+    <ul class="aiuto">
+      <li>Frecce o WASD: muovi</li>
+      <li>Spazio: salta (anche due volte!)</li>
+      <li>X: spara</li>
+      <li>Freccia giù: scendi dalle piattaforme</li>
+      <li>P: pausa</li>
+      <li>M: suono</li>
+    </ul>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

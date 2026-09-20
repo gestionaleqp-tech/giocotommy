@@ -1,75 +1,175 @@
+:root {
+  --notte: #0f0c22;
+  --pannello: #1c1740;
+  --bordo: #3a3070;
+  --testo: #ece8ff;
+  --luce: #ffd166;
+  --rosso: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
 body {
-  background-color: #0f1016;
-  color: #e0e0e0;
-  font-family: 'Courier New', Courier, monospace;
+  margin: 0;
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  background: radial-gradient(ellipse at 50% 0%, #1f1850 0%, var(--notte) 65%);
+  color: var(--testo);
+  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
 }
 
-.game-container {
-  background-color: #1a1c24;
-  border: 2px solid #3b3f5c;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+.gioco {
+  width: 100%;
+  max-width: 960px;
+  padding: 12px;
+  background: var(--pannello);
+  border: 2px solid var(--bordo);
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
 }
 
 header {
-  border-bottom: 1px solid #3b3f5c;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 1.2rem;
-  color: #ff5555;
   margin: 0;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: clamp(0.6rem, 2.4vw, 0.95rem);
+  font-weight: normal;
+  line-height: 1.4;
+  color: var(--luce);
+  text-shadow: 2px 2px 0 #7a1f3d;
 }
 
-#inventory {
-  font-size: 0.85rem;
-  color: #f1fa8c;
-}
-
-#story-box {
-  background-color: #121319;
-  border: 1px solid #2a2e43;
-  border-radius: 4px;
-  padding: 20px;
-  min-height: 120px;
-  margin-bottom: 20px;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-#choices-box {
+.comandi-rapidi {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.choice-btn {
-  background-color: #282a36;
-  color: #f8f8f2;
-  border: 1px solid #44475a;
-  padding: 12px 15px;
-  border-radius: 4px;
+.comandi-rapidi button {
+  width: 40px;
+  height: 36px;
+  font-size: 1.1rem;
+  color: var(--testo);
+  background: var(--bordo);
+  border: 1px solid #5a4ea0;
+  border-radius: 8px;
   cursor: pointer;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95rem;
-  text-align: left;
-  transition: background 0.2s;
 }
 
-.choice-btn:hover {
-  background-color: #44475a;
-  border-color: #6272a4;
+.comandi-rapidi button:hover {
+  background: #4a3f8a;
+}
+
+.schermo {
+  line-height: 0;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 224;
+  background: #000;
+  border: 2px solid var(--bordo);
+  border-radius: 8px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- Tasti touch (solo su telefono / tablet) ---------- */
+#controlli {
+  display: none;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+body.touch #controlli {
+  display: flex;
+}
+
+@media (pointer: coarse) {
+  #controlli {
+    display: flex;
+  }
+}
+
+.gruppo {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.tasto {
+  min-width: 72px;
+  height: 72px;
+  padding: 0 10px;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: var(--testo);
+  background: rgba(90, 78, 160, 0.55);
+  border: 2px solid #6b5fc0;
+  border-radius: 16px;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tasto.tondo {
+  border-radius: 50%;
+  min-width: 78px;
+  height: 78px;
+}
+
+.tasto.grande {
+  min-width: 92px;
+  height: 92px;
+  background: rgba(255, 209, 102, 0.3);
+  border-color: var(--luce);
+}
+
+.tasto.premuto,
+.tasto:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.aiuto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: #b9b0e8;
+}
+
+body.touch .aiuto {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .aiuto {
+    display: none;
+  }
 }
