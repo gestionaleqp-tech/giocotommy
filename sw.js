@@ -1,13 +1,13 @@
 // Service worker di "Tommy e la Villa Scura": fa funzionare il gioco anche senza internet.
 // Cambia il numero di VERSIONE quando pubblichi una nuova versione dei file.
-const VERSIONE = "tommy-v3";
+const VERSIONE = "tommy-v4";
 const FILE = [
   "./", "index.html", "style.css", "app.js", "manifest.webmanifest", "PressStart2P.woff2",
   "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(VERSIONE).then((c) => c.addAll(FILE)).then(() => self.skipWaiting()));
+e.waitUntil(caches.open(VERSIONE).then((c) => Promise.allSettled(FILE.map((f) => c.add(f)))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", (e) => {
